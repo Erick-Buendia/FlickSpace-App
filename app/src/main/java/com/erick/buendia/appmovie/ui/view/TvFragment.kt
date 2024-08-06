@@ -1,6 +1,5 @@
 package com.erick.buendia.appmovie.ui.view
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.erick.buendia.appmovie.R
 import com.erick.buendia.appmovie.data.model.Tv
 import com.erick.buendia.appmovie.ui.adapter.TvAdapter
-import com.erick.buendia.appmovie.ui.viewmodel.MovieUiState
 import com.erick.buendia.appmovie.ui.viewmodel.TvFragmentViewModel
 import com.erick.buendia.appmovie.ui.viewmodel.TvUiState
 
