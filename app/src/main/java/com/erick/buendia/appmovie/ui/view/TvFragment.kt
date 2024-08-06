@@ -9,8 +9,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.erick.buendia.appmovie.R
 import com.erick.buendia.appmovie.data.model.Tv
+import com.erick.buendia.appmovie.ui.adapter.TvAdapter
 import com.erick.buendia.appmovie.ui.viewmodel.MovieUiState
 import com.erick.buendia.appmovie.ui.viewmodel.TvFragmentViewModel
 import com.erick.buendia.appmovie.ui.viewmodel.TvUiState
@@ -20,7 +23,7 @@ import com.erick.buendia.appmovie.ui.viewmodel.TvUiState
 //private const val ARG_PARAM2 = "param2"
 
 class TvFragment : Fragment() {
-
+    private lateinit var recyclerView: RecyclerView
 //    private var param1: String? = null
 //    private var param2: String? = null
 //
@@ -53,7 +56,9 @@ class TvFragment : Fragment() {
     }
 
     private fun initRecycleViewTv(tv: Tv, view: View) {
-
+        recyclerView = view.findViewById(R.id.recycler_tv)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = TvAdapter(tv.results)
 
     }
 
