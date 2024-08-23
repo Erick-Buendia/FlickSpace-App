@@ -41,6 +41,8 @@ android {
 
 dependencies {
 
+    val navigationVersion = "2.7.7"
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -56,7 +58,9 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.16.0")
     // Para usar fragamentos en android
     implementation("androidx.fragment:fragment-ktx:1.8.1")
-
+    //Navigation Component
+    implementation("androidx.navigation:navigation-fragment-ktx:${navigationVersion}")
+    implementation("androidx.navigation:navigation-ui-ktx:${navigationVersion}")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
