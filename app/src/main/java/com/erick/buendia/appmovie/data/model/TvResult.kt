@@ -1,5 +1,9 @@
 package com.erick.buendia.appmovie.data.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class TvResult(
     val adult: Boolean,
     val backdrop_path: String,
@@ -16,4 +20,4 @@ data class TvResult(
     val poster_path: String,
     val vote_average: Double,
     val vote_count: Int
-)
+): Parcelable

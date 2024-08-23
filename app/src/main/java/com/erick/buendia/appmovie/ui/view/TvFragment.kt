@@ -1,5 +1,6 @@
 package com.erick.buendia.appmovie.ui.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,7 +12,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.erick.buendia.appmovie.R
+import com.erick.buendia.appmovie.data.model.Movie
+import com.erick.buendia.appmovie.data.model.Result
 import com.erick.buendia.appmovie.data.model.Tv
+import com.erick.buendia.appmovie.data.model.TvResult
 import com.erick.buendia.appmovie.ui.adapter.TvAdapter
 import com.erick.buendia.appmovie.ui.viewmodel.TvFragmentViewModel
 import com.erick.buendia.appmovie.ui.viewmodel.TvUiState
@@ -56,8 +60,16 @@ class TvFragment : Fragment() {
     private fun initRecycleViewTv(tv: Tv, view: View) {
         recyclerView = view.findViewById(R.id.recycler_tv)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = TvAdapter(tv.results)
+        recyclerView.adapter = TvAdapter(tv.results) { tv ->
+            navigationTvDetail(tv)
+        }
 
+    }
+
+    private fun navigationTvDetail(tv: TvResult){
+        val intent = Intent(context, DetailTvActivity::class.java)
+        intent.putExtra(DetailTvActivity.DETAIL_TV, tv)
+        startActivity(intent)
     }
 
     private fun LondigResponse() {
