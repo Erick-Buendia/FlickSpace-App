@@ -16,14 +16,9 @@
         android:name="com.erick.buendia.appmovie.ui.view.TvFragment"
         android:label="fragment_tv"
         tools:layout="@layout/fragment_tv" />
-    <activity
-        android:id="@+id/detailMovieActivity"
-        android:name="com.erick.buendia.appmovie.ui.view.DetailMovieActivity"
-        android:label="activity_detail_movie"
-        tools:layout="@layout/activity_detail_movie" />
-    <activity
-        android:id="@+id/detailTvActivity"
-        android:name="com.erick.buendia.appmovie.ui.view.DetailTvActivity"
-        android:label="activity_detail_tv"
-        tools:layout="@layout/activity_detail_tv" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.erick.buendia.appmovie.ui.view.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" />
 </navigation>

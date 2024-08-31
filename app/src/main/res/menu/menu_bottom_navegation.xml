@@ -8,4 +8,8 @@
         android:id="@+id/tvFragment"
         android:icon="@drawable/icon_live_tv"
         android:title="Series"></item>
+    <item
+        android:id="@+id/favoriteFragment"
+        android:icon="@drawable/icon_favorite"
+        android:title="Favoritos"></item>
 </menu>
