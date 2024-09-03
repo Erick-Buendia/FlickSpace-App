@@ -8,9 +8,11 @@ import kotlinx.coroutines.Dispatchers
 
 import androidx.lifecycle.viewModelScope
 import com.erick.buendia.appmovie.data.MoviesRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
 
 sealed interface MovieUiState {
     data class Success(val movie: Movie?) : MovieUiState
@@ -18,11 +20,10 @@ sealed interface MovieUiState {
     object Loading : MovieUiState
 }
 
-class MainViewModel : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor( private var getMoviesRepository:MoviesRepository) : ViewModel() {
 
-
-    //  var moviesModel: MovieUiState by mutableStateOf(MovieUiState.Loading)
-    private var getMoviesRepository = MoviesRepository()
+   // private var getMoviesRepository = MoviesRepository()
     val moviesModel = MutableLiveData<MovieUiState>()
 
     fun onCreate() {

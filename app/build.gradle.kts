@@ -2,7 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-parcelize")
-    id("com.google.devtools.ksp") version "1.9.10-1.0.13"
+    id("com.google.dagger.hilt.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -44,6 +45,7 @@ dependencies {
 
     val navigationVersion = "2.7.7"
     val roomVersion = "2.6.1"
+    val daggerHiltVersion = "2.52"
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -65,13 +67,18 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:${navigationVersion}")
     //Room
     implementation("androidx.room:room-ktx:${roomVersion}")
-    ksp("androidx.room:room-compiler:$roomVersion")
-//    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
 
+    // Dagger Hilt Inyeccion de dependencias
+    implementation("com.google.dagger:hilt-android:${daggerHiltVersion}")
+    kapt("com.google.dagger:hilt-android-compiler:${daggerHiltVersion}")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
 
+}
+kapt {
+    correctErrorTypes = true
 }

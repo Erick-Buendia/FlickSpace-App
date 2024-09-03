@@ -17,7 +17,9 @@ import com.erick.buendia.appmovie.data.model.Result
 import com.erick.buendia.appmovie.ui.adapter.MovieAdapter
 import com.erick.buendia.appmovie.ui.viewmodel.MainViewModel
 import com.erick.buendia.appmovie.ui.viewmodel.MovieUiState
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MovieFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
 

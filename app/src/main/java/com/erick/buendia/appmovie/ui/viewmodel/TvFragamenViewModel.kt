@@ -5,10 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.erick.buendia.appmovie.data.TvRepository
 import com.erick.buendia.appmovie.data.model.Tv
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
 
 sealed interface TvUiState {
     data class Success(val tv: Tv?) : TvUiState
@@ -16,9 +18,9 @@ sealed interface TvUiState {
     object Loading : TvUiState
 }
 
-class TvFragmentViewModel : ViewModel() {
+@HiltViewModel
+class TvFragmentViewModel @Inject constructor(var getTvRepository:TvRepository)  : ViewModel() {
 
-    private var getTvRepository = TvRepository()
     val tvModel = MutableLiveData<TvUiState>()
 
     fun onCreate() {

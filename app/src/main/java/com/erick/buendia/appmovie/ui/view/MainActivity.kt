@@ -8,6 +8,10 @@ import androidx.navigation.ui.setupWithNavController
 import com.erick.buendia.appmovie.databinding.ActivityMainBinding
 
 import com.erick.buendia.appmovie.R
+import dagger.hilt.android.AndroidEntryPoint
+
+
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
