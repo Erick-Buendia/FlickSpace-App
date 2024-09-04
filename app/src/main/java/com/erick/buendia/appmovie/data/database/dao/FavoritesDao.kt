@@ -9,8 +9,8 @@ import com.erick.buendia.appmovie.data.database.entities.FavoritesEntity
 @Dao
 interface FavoritesDao {
 
-    @Query("SELECT * FROM favorites_table ORDER BY id DESC")
-    suspend fun  getAllFavorites(): List<FavoritesEntity>
+    @Query("SELECT * FROM favorites_table")
+    suspend fun getAllFavorites(): List<FavoritesEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(favorites:List<FavoritesEntity>)
