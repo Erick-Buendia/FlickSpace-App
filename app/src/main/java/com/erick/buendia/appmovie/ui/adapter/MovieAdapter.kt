@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.erick.buendia.appmovie.R
 import com.erick.buendia.appmovie.data.model.Result
 
-class MovieAdapter(private val moviesList: List<Result>, private  val movieListener: (Result) -> Unit) : RecyclerView.Adapter<MovieViewHolder>() {
+class MovieAdapter(private val moviesList: List<Result>, private  val onClickMovieListener: (Result) -> Unit, private val onClickAddFavorite: (Result) -> Unit) : RecyclerView.Adapter<MovieViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -14,12 +14,9 @@ class MovieAdapter(private val moviesList: List<Result>, private  val movieListe
         return  MovieViewHolder(layoutInflater.inflate(R.layout.item_list_movie, parent, false))
     }
 
-
-
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val item = moviesList[position]
-        holder.render(item)
-        holder.itemView.setOnClickListener { movieListener(item) }
+        holder.render(item, onClickMovieListener, onClickAddFavorite)
     }
 
     override fun getItemCount(): Int {

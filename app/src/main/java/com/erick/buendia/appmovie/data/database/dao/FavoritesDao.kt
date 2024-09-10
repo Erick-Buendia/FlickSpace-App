@@ -13,5 +13,5 @@ interface FavoritesDao {
     suspend fun getAllFavorites(): List<FavoritesEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(favorites:List<FavoritesEntity>)
+    suspend fun insertAll(favorites:FavoritesEntity)
 }

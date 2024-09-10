@@ -9,4 +9,8 @@ class FavoritesRepository @Inject constructor(private val favoritesDao: Favorite
     suspend fun getFavoritesAll(): List<FavoritesEntity>{
        return favoritesDao.getAllFavorites()
     }
+
+    suspend fun addFavorite(favorites: FavoritesEntity){
+        return favoritesDao.insertAll(favorites)
+    }
 }

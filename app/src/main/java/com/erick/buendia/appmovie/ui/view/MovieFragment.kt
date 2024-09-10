@@ -22,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MovieFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
+    private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +32,7 @@ class MovieFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val mainViewModel: MainViewModel by viewModels()
+
         mainViewModel.onCreate()
         mainViewModel.moviesModel.observe(viewLifecycleOwner, Observer {
             when (it) {
@@ -51,10 +52,15 @@ class MovieFragment : Fragment() {
     fun initRecycleViewMovie(movies: Movie, view: View) {
         recyclerView = view.findViewById(R.id.recycler_movies)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = MovieAdapter(movies.results) { movie ->
-            navigationMovieDetail(movie)
-        }
+        recyclerView.adapter = MovieAdapter(moviesList = movies.results,
+            onClickMovieListener = { movie -> navigationMovieDetail(movie) },
+            onClickAddFavorite = { movie -> addFavoriteMovie(movie) })
 
+    }
+
+    private fun addFavoriteMovie(movies: Result){
+        Toast.makeText(context, "Se ha agrego ${movies.title} a favoritos", Toast.LENGTH_LONG).show()
+        mainViewModel.addFavoriteMovie(movies)
     }
 
     private fun navigationMovieDetail(movie: Result) {
@@ -63,11 +69,11 @@ class MovieFragment : Fragment() {
         startActivity(intent)
     }
 
-    fun ErrorResponse() {
+    private fun ErrorResponse() {
         Toast.makeText(context, "Error al conectar a la api", Toast.LENGTH_LONG).show()
     }
 
-    fun LoandingResponse() {
+    private fun LoandingResponse() {
         Toast.makeText(context, "Cargando api", Toast.LENGTH_LONG).show()
     }
 
