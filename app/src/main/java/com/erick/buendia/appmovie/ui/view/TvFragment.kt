@@ -22,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class TvFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
+    private val tvFragmentViewModel: TvFragmentViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,7 +31,7 @@ class TvFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val tvFragmentViewModel: TvFragmentViewModel by viewModels()
+
         tvFragmentViewModel.onCreate()
         tvFragmentViewModel.tvModel.observe(viewLifecycleOwner, Observer {
             when (it) {
@@ -41,13 +42,19 @@ class TvFragment : Fragment() {
         })
     }
 
+
     private fun initRecycleViewTv(tv: Tv, view: View) {
         recyclerView = view.findViewById(R.id.recycler_tv)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = TvAdapter(tv.results) { tv ->
-            navigationTvDetail(tv)
-        }
+        recyclerView.adapter = TvAdapter(
+            tvList = tv.results,
+            onClickTvListener = { tv -> navigationTvDetail(tv) },
+            onClickAddFavorite = { tv -> addFavoriteTv(tv) })
+    }
 
+    private fun addFavoriteTv(tv: TvResult) {
+        tvFragmentViewModel.addFavoriteTv(tv)
+        Toast.makeText(context, "Se ha agregado ${tv.name} a favoritos", Toast.LENGTH_LONG).show()
     }
 
     private fun navigationTvDetail(tv: TvResult) {

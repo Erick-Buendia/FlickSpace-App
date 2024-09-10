@@ -10,9 +10,16 @@ class TvViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     val bindings = ItemListTvBinding.bind(view)
 
-    fun render(tv: TvResult){
+    fun render(
+        tv: TvResult,
+        onClickTvListener: (TvResult) -> Unit,
+        onClickAddFavorite: (TvResult) -> Unit
+    ){
         bindings.tvTitle.text = tv.name
         bindings.releaseDateTv.text = tv.first_air_date
         Glide.with(bindings.lyImageTv.context).load("https://image.tmdb.org/t/p/w500${tv.poster_path}").into(bindings.ivTv)
+        itemView.setOnClickListener{onClickTvListener(tv)}
+        bindings.addFavoriteTv.setOnClickListener{onClickAddFavorite(tv)}
+
     }
 }

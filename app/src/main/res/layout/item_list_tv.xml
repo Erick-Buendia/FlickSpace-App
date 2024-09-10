@@ -7,24 +7,27 @@
     android:layout_margin="15dp">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/ly_image_tv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="160dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/iv_tv"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_alignParentStart="true"
             android:contentDescription="Imagen de la serie" />
 
         <LinearLayout
             android:id="@+id/ly_text_tv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/iv_tv"
             android:orientation="vertical">
 
             <TextView
@@ -48,8 +51,18 @@
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 tools:text="10/10/2021" />
+
+            <ImageButton
+                android:id="@+id/add_favorite_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/icon_favorite_black"
+                android:textStyle="bold" />
+
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.erick.buendia.appmovie.R
 import com.erick.buendia.appmovie.data.model.TvResult
 
-class TvAdapter(private val tvList: List<TvResult>, private  val tvListener: (TvResult) -> Unit) : RecyclerView.Adapter<TvViewHolder>() {
+class TvAdapter(private val tvList: List<TvResult>, private  val onClickTvListener: (TvResult) -> Unit, private val onClickAddFavorite: (TvResult) -> Unit) : RecyclerView.Adapter<TvViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvViewHolder {
         val layoutInflater =  LayoutInflater.from(parent.context)
@@ -15,8 +15,8 @@ class TvAdapter(private val tvList: List<TvResult>, private  val tvListener: (Tv
 
     override fun onBindViewHolder(holder: TvViewHolder, position: Int) {
         val item = tvList[position]
-        holder.render(item)
-        holder.itemView.setOnClickListener { tvListener(item) }
+        holder.render(item, onClickTvListener, onClickAddFavorite)
+
     }
 
     override fun getItemCount(): Int {

@@ -3,8 +3,11 @@ package com.erick.buendia.appmovie.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.erick.buendia.appmovie.data.FavoritesRepository
 import com.erick.buendia.appmovie.data.TvRepository
+import com.erick.buendia.appmovie.data.database.entities.FavoritesEntity
 import com.erick.buendia.appmovie.data.model.Tv
+import com.erick.buendia.appmovie.data.model.TvResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,7 +22,7 @@ sealed interface TvUiState {
 }
 
 @HiltViewModel
-class TvFragmentViewModel @Inject constructor(var getTvRepository:TvRepository)  : ViewModel() {
+class TvFragmentViewModel @Inject constructor(var getTvRepository:TvRepository, var getFavoriteRepository: FavoritesRepository)  : ViewModel() {
 
     val tvModel = MutableLiveData<TvUiState>()
 
@@ -35,5 +38,15 @@ class TvFragmentViewModel @Inject constructor(var getTvRepository:TvRepository) 
             }
         }
 
+    }
+    fun addFavoriteTv(tv: TvResult){
+        val favorites = FavoritesEntity(
+            tv.id,
+            tv.name,
+            tv.poster_path
+        )
+        viewModelScope.launch(Dispatchers.IO) {
+            getFavoriteRepository.addFavorite(favorites)
+        }
     }
 }
