@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,15 +27,19 @@ class FavoritesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
         // Inflate the layout for this fragment
+
+
         return inflater.inflate(R.layout.fragment_favorites, container, false)
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val favoritesFragmentViewModel : FavoritesFragmentViewModel by viewModels()
+
+        val favoritesFragmentViewModel: FavoritesFragmentViewModel by viewModels()
         favoritesFragmentViewModel.getFavorites()
         favoritesFragmentViewModel.favoritesModel.observe(viewLifecycleOwner, Observer {
             initRecycleViewFavorite(it, view)
@@ -42,7 +47,7 @@ class FavoritesFragment : Fragment() {
     }
 
 
-    fun initRecycleViewFavorite(favorites: List<FavoritesEntity>, view: View){
+    fun initRecycleViewFavorite(favorites: List<FavoritesEntity>, view: View) {
         recyclerView = view.findViewById(R.id.recycler_favorites)
         recyclerView.layoutManager = GridLayoutManager(context, 3)
         recyclerView.adapter = FavoriteAdapter(favorites)
